@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graphs Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        img {
+            max-width: 90%;
+            margin: 20px auto;
+            display: block;
+        }
+        h2 {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Total Spend per Month</h2>
+    <img src="{{ url_for('static', filename='Total Spend per Month.png') }}" alt="Total Spend per Month">
+
+    <h2>Spend by Brand Type</h2>
+    <img src="{{ url_for('static', filename='Spend by Brand Type.png') }}" alt="Spend by Brand Type">
+
+    <h2>Seasonal Spending Trends</h2>
+    <img src="{{ url_for('static', filename='Seasonal Spending Trends.png') }}" alt="Seasonal Spending Trends">
+
+</body>
+</html>
