@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Churn Prediction Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Inter', sans-serif;
+            color: #212529;
+            margin: 0;
+            padding-top: 70px;
+        }
+        .churn-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            max-width: 1000px;
+            margin: auto;
+        }
+        h2 {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2d3436;
+            font-size: 2rem;
+        }
+        h3 {
+            font-weight: 600;
+            text-align: center;
+            margin: 40px 0 20px;
+            color: #2d3436;
+            font-size: 1.5rem;
+        }
+        h5 {
+            font-weight: 500;
+            text-align: center;
+            margin: 15px 0;
+            color: #636e72;
+            font-size: 1rem;
+        }
+        table {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 0.95rem;
+        }
+        table thead {
+            background-color: #343a40;
+            color: white;
+        }
+        img {
+            margin: 20px 0;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        img:hover {
+            transform: scale(1.02);
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 20px;
+            color: #ffffff !important;
+        }
+        .nav-link {
+            color: #dfe6e9 !important;
+            margin-left: 20px;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        .nav-link:hover {
+            color: #74b9ff !important;
+        }
+        .btn-logout {
+            background-color: #e74c3c;
+            padding: 6px 14px;
+            border-radius: 15px;
+            color: white !important;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .btn-logout:hover {
+            background-color: #c0392b;
+        }
+        hr {
+            border-top: 1px solid #dcdde1;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Churn Prediction</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('Search') }}">Search Data</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('upload') }}">Upload Data</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('churn') }}">Churn Prediction</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('predict') }}">Random Forest Prediction</a></li>
+                <li class="nav-item"><a class="nav-link btn-logout" href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container churn-container">
+    <h2>🧠 Churn Model Report</h2>
+
+    <h5>Test Size: {{ test_size }}</h5>
+    <h5>Churn Threshold (days): {{ threshold }}</h5>
+
+    <div class="table-responsive my-4">
+        {{ metrics.to_html(classes="table table-bordered table-striped text-center", border=0) | safe }}
+    </div>
+
+    <hr>
+
+    <h3>📊 Churn Analysis Visuals</h3>
+
+    <h5>1️⃣ Days Since Last Purchase Distribution</h5>
+    <div class="text-center">
+        <img src="/static/churn_days_distribution.png" alt="Days Distribution" class="img-fluid">
+    </div>
+
+    <h5>2️⃣ Average Spend by Churn Status</h5>
+    <div class="text-center">
+        <img src="/static/churn_total_spent.png" alt="Churn vs Spend" class="img-fluid">
+    </div>
+
+    <h5>3️⃣ Spend vs Recency Scatter Plot</h5>
+    <div class="text-center">
+        <img src="/static/churn_scatter_plot.png" alt="Scatter Plot" class="img-fluid">
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
